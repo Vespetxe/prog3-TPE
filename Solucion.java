@@ -5,6 +5,8 @@ public class Solucion {
     private List<Maquina> solucion;
     private int sumaPiezas;
 
+    public void setSuma(int suma){this.sumaPiezas = suma;}
+
     public Solucion(){
         this.solucion = new LinkedList<>();
         sumaPiezas = 0;
@@ -32,7 +34,23 @@ public class Solucion {
         this.solucion.addAll(s.getSolucion());
     }
     public void removeLast(){
+        this.sumaPiezas -= this.solucion.getLast().getPiezas(); 
         this.solucion.removeLast();
 
+    }
+
+    public boolean isEmpty() {
+        return solucion.isEmpty();
+    }
+    @Override
+    public String toString(){
+        String output="[";
+        if (this!=null) {
+            for (Maquina maquina : solucion) {
+            output+=maquina.getNombre()+", ";
+        }
+        output+="]";
+        }
+        return output;
     }
 }
