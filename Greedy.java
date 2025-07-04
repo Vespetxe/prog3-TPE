@@ -33,9 +33,9 @@ public class Greedy {
         int contador = 0;
         Solucion solucionGreedy = new Solucion();
         Iterator<Maquina> itMaquina = maquinas.iterator();
+        Maquina m = itMaquina.next();
         while (itMaquina.hasNext() && solucionGreedy.suma() < piezasTotales) {
             contador++;
-            Maquina m = itMaquina.next();
             if (solucionGreedy.suma() + m.getPiezas() <= piezasTotales) {
                 solucionGreedy.agregarMaquina(m);
             } else {
