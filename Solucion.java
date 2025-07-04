@@ -4,13 +4,18 @@ import java.util.List;
 public class Solucion {
     private List<Maquina> solucion;
     private int sumaPiezas;
+    private int estadosGenerados;
 
     public void setSuma(int suma){this.sumaPiezas = suma;}
 
     public Solucion(){
         this.solucion = new LinkedList<>();
-        sumaPiezas = 0;
+        this.sumaPiezas = 0;
+        this.estadosGenerados = 0;
     }
+
+    public void setEstadosGenerados(int e){this.estadosGenerados = e;}
+    public int getEstadosGenerados(){return this.estadosGenerados;}
 
     public List<Maquina> getSolucion() {
         return solucion;

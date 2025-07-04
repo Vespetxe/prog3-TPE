@@ -1,36 +1,56 @@
-import java.util.LinkedList;
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
 
 public class Greedy {
-    
-    public Solucion hacerGreedy(List<Maquina> maquinas, int piezasTotales){
-        Solucion solucion = new Solucion();
-        int sumaPiezas =0;
-        ordenar(maquinas);
-        while(sumaPiezas<piezasTotales){
-            Maquina m = seleccionar(maquinas);
-            if(sumaPiezas+ m.getPiezas()<=piezasTotales){
-                solucion.agregarMaquina(m);
-            }
-        }
-        if(sumaPiezas==piezasTotales){
-            return solucion;
-        }else return null; // no hay solucion
+
+    private Solucion mejorSolucion;
+
+    public Greedy() {
+        this.mejorSolucion = new Solucion();
     }
 
+    public Solucion algoritmoVoraz(ArrayList<Maquina> maquinas, int piezasTotales) {
+        if (mejorSolucion == null) {
+            mejorSolucion = new Solucion();
+        }
+        greedy(maquinas, piezasTotales);
+        return mejorSolucion;
+    }
 
+    private void greedy(ArrayList<Maquina> maquinas, int piezasTotales) {
+        // los candidatos son todas las maquinas
+        // estrategia: ordenar lista de maquinas de mayor a menor cantidad de piezas que
+        // produce
+        // elegir en ese orden la maquina que produzca mas piezas y no se pase del total
+        // el objetivo seria elegir la cantidad minima de maquinas que logre producir el
+        // total de piezas
+        // puede no encontrar solucion (puede ser que no tenga solucion pero hay que
+        // aclararlo
 
+        Collections.sort(maquinas, Comparator.reverseOrder());
+        int contador = 0;
+        Solucion solucionGreedy = new Solucion();
+        Iterator<Maquina> itMaquina = maquinas.iterator();
+        while (itMaquina.hasNext() && solucionGreedy.suma() < piezasTotales) {
+            contador++;
+            Maquina m = itMaquina.next();
+            if (solucionGreedy.suma() + m.getPiezas() <= piezasTotales) {
+                solucionGreedy.agregarMaquina(m);
+            } else {
+                m = itMaquina.next();
+            }
 
-
-
-
-    // estrategia: ordenar lista de maquinas de mayor a menor cantidad de piezas que produce
-    // elegir en ese orden la maquina que produzca mas piezas y no se pase del total
-    // el objetivo seria elegir la cantidad minima de maquinas que logre producir el total de piezas
-
-    // podria contar el resto de piezas q me quedan
-
-    //tener cuidado con el greedy puede no encontrar solucion (puede ser que no tenga solucion pero hay que aclararlo)
-
+        }
+        if (solucionGreedy.suma() == piezasTotales) { // encuentra solucion cuando se iguala la suma de piezas totales
+                                                      // de la solucion construida con la suma de piezas totales a
+                                                      // producir
+            mejorSolucion = solucionGreedy;
+            mejorSolucion.setEstadosGenerados(contador);
+        } else {
+            mejorSolucion = null; // que devuelva null significa que no encontro solucion
+        }
+    }
 
 }
