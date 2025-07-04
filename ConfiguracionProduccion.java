@@ -36,10 +36,7 @@ public class ConfiguracionProduccion {
     };
 
     public void run() {
-        System.out.println(this.piezasTotales);
-        for (Maquina maquina : maquinas) {
-            System.out.println(maquina.toString());
-        }
+        
         Greedy greedy = new Greedy();
         this.mejorSolucion = greedy.algoritmoVoraz(maquinas, piezasTotales);
         if (mejorSolucion != null) {
