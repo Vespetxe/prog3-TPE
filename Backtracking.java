@@ -45,6 +45,7 @@ public class Backtracking {
                 mejorSolucion.clear();
                 mejorSolucion.addAll(solucionActual);
                 mejorSolucion.setSuma(solucionActual.suma());
+                mejorSolucion.setEstadosGenerados(solucionActual.getEstadosGenerados());
 
             }
         } else {

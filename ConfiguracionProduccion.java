@@ -46,7 +46,7 @@ public class ConfiguracionProduccion {
             System.out.println("Candidatos considerados= " + mejorSolucion.getEstadosGenerados());
         } else
             System.out.println("Solucion parcial por optimizacion: No se encontro solucion.");
-
+        
         Backtracking bt = new Backtracking(piezasTotales, maquinas);
         this.mejorSolucion = bt.busquedaExhaustiva();
 
