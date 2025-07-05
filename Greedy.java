@@ -8,7 +8,7 @@ public class Greedy {
     private Solucion mejorSolucion;
 
     public Greedy() {
-        this.mejorSolucion = new Solucion();
+        this.mejorSolucion = null;
     }
 
     public Solucion algoritmoVoraz(ArrayList<Maquina> maquinas, int piezasTotales) {
@@ -36,6 +36,8 @@ public class Greedy {
         Maquina m = itMaquina.next();
         while (itMaquina.hasNext() && solucionGreedy.suma() < piezasTotales) {
             contador++;
+            //intentar poner todas las veces la maquina y recien cuando me paso del total voy con la proxima
+            // este algoritmo no permite repetir maquinas
             if (solucionGreedy.suma() + m.getPiezas() <= piezasTotales) {
                 solucionGreedy.agregarMaquina(m);
             } else {

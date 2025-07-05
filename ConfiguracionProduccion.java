@@ -47,6 +47,7 @@ public class ConfiguracionProduccion {
         } else
             System.out.println("Solucion parcial por optimizacion: No se encontro solucion.");
         
+        // puedo crear un objeto mejor solucion 
         Backtracking bt = new Backtracking(piezasTotales, maquinas);
         this.mejorSolucion = bt.busquedaExhaustiva();
 

@@ -10,15 +10,16 @@ public class Backtracking {
     public Backtracking(int piezasTotales, ArrayList<Maquina> maquinas) {
         this.piezasTotales = piezasTotales;
         this.maquinas = maquinas;
-        this.mejorSolucion = new Solucion();
+        this.mejorSolucion = null;
     }
 
     public Solucion busquedaExhaustiva() {
         if (mejorSolucion == null) {
             mejorSolucion = new Solucion();
         }
-        backtracking(new Solucion(), maquinas.get(0), 0);
-
+        Solucion solucionActual = new Solucion();
+        backtracking(solucionActual, maquinas.get(0), 0);
+        mejorSolucion.setEstadosGenerados(solucionActual.getEstadosGenerados());
         return mejorSolucion;
     };
     // Se comienza en la raíz del árbol, con una solución vacía y suma de piezas =
@@ -40,20 +41,21 @@ public class Backtracking {
     // una vez encontrada una mejor solucion (la de menos cantidad de maquinas
     // posibles) esa va a ser nuestro estado solucion.
     private void backtracking(Solucion solucionActual, Maquina maquinaActual, int pos) {
+
+        solucionActual.setEstadosGenerados(solucionActual.getEstadosGenerados()+1);
+
         if (solucionActual.suma() == piezasTotales) {
             if (esMejor(solucionActual, mejorSolucion)) {
                 mejorSolucion.clear();
                 mejorSolucion.addAll(solucionActual);
                 mejorSolucion.setSuma(solucionActual.suma());
-                mejorSolucion.setEstadosGenerados(solucionActual.getEstadosGenerados());
-
             }
         } else {
             for (int i = pos; i < maquinas.size(); i++) {
                 Maquina siguiente = maquinas.get(i);
                 if ((solucionActual.suma() + siguiente.getPiezas()) <= piezasTotales) {
                     if (!poda(solucionActual, siguiente)) {
-                        solucionActual.setEstadosGenerados(solucionActual.getEstadosGenerados()+1);
+                        
                         solucionActual.agregarMaquina(siguiente);
                         backtracking(solucionActual, siguiente, i);
                         solucionActual.removeLast();
