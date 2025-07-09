@@ -35,9 +35,7 @@ public class Greedy {
         Iterator<Maquina> itMaquina = maquinas.iterator();
         Maquina m = itMaquina.next();
         while (itMaquina.hasNext() && solucionGreedy.suma() < piezasTotales) {
-            //intentar poner todas las veces la maquina y recien cuando me paso del total voy con la proxima
-            // este algoritmo no permite repetir maquinas
-            if (solucionGreedy.suma() + m.getPiezas() <= piezasTotales) {
+             if (solucionGreedy.suma() + m.getPiezas() <= piezasTotales) {
                 solucionGreedy.agregarMaquina(m);
             } else {
                 m = itMaquina.next();
