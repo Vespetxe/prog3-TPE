@@ -30,18 +30,18 @@ public class Greedy {
         // aclararlo
 
         Collections.sort(maquinas, Comparator.reverseOrder());
-        int contador = 0;
+        int contador = 1;
         Solucion solucionGreedy = new Solucion();
         Iterator<Maquina> itMaquina = maquinas.iterator();
         Maquina m = itMaquina.next();
         while (itMaquina.hasNext() && solucionGreedy.suma() < piezasTotales) {
-            contador++;
             //intentar poner todas las veces la maquina y recien cuando me paso del total voy con la proxima
             // este algoritmo no permite repetir maquinas
             if (solucionGreedy.suma() + m.getPiezas() <= piezasTotales) {
                 solucionGreedy.agregarMaquina(m);
             } else {
                 m = itMaquina.next();
+                contador++;
             }
 
         }
